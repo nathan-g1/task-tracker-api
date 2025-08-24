@@ -14,9 +14,10 @@ namespace TaskTrackerApi.Repositories
         public IEnumerable<TaskItem> GetAll(int page, int pageSize)
         {
             return _tasks
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            .OrderByDescending(t => t.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
         }
         public int GetTotalCount() => _tasks.Count;
 
